@@ -1,13 +1,13 @@
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
-	DocumentRoot /vagrant/htdocs
+	DocumentRoot /home/montenshi/htdocs
 	<Directory />
-		Options FollowSymLinks
+		Options -Indexes FollowSymLinks
 		AllowOverride None
 	</Directory>
-	<Directory /vagrant/htdocs/>
-		Options Indexes FollowSymLinks MultiViews
+	<Directory /home/montenshi/htdocs>
+		Options -Indexes FollowSymLinks MultiViews
 		AllowOverride None
 		Order allow,deny
 		allow from all
