@@ -31,4 +31,9 @@ RUN mkdir -p /home/montenshi/htdocs
 COPY apache-sites-default /etc/apache2/sites-available/default
 COPY apache-envvars /etc/apache2/envvars
 
+ADD pukiwiki-with-qhm.tar /home/montenshi/htdocs
+WORKDIR /home/montenshi
+
 EXPOSE 80
+
+CMD apachectl -DFOREGROUND
