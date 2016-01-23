@@ -6,7 +6,7 @@ RUN apt-get install -y python-software-properties software-properties-common apt
 RUN apt-key update
 RUN apt-get update -y
 
-RUN apt-get install -y php5-common libapache2-mod-php5 php5-cli \
+RUN apt-get install -y php5-common libapache2-mod-php5 php5-cli php5-curl \
     bzr git mercurial build-essential \
     curl
 
@@ -31,8 +31,24 @@ RUN mkdir -p /home/montenshi/htdocs
 COPY apache-sites-default /etc/apache2/sites-available/default
 COPY apache-envvars /etc/apache2/envvars
 
-ADD pukiwiki-with-qhm.tar /home/montenshi/htdocs
+# Install Pukiwiki and QHM
+ADD pukiwiki-with-qhm.tar.gz /home/montenshi/htdocs
 WORKDIR /home/montenshi
+
+# Install Movieviewer Plugin
+COPY pukiwiki-movieviewer/plugin /home/montenshi/htdocs/plugin
+WORKDIR /home/montenshi/htdocs/plugin/movieviewer
+RUN composer install
+
+# MovieViewer Plugin Setting
+WORKDIR /home/montenshi
+COPY pukiwiki-movieviewer-resources/movieviewer.ini.user.php /home/montenshi/htdocs/plugin
+
+RUN mkdir -p /home/montenshi/resources/settings
+RUN mkdir -p /home/montenshi/resources/data
+COPY pukiwiki-movieviewer-resources/settings /home/montenshi/resources/settings
+COPY pukiwiki-movieviewer-resources/data /home/montenshi/resources/data
+RUN chown -R www-data:www-data htdocs resources
 
 EXPOSE 80
 

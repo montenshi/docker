@@ -1,0 +1,3 @@
+[submodule "pukiwiki-movieviewer"]
+	path = pukiwiki-movieviewer
+	url = git@github.com:montenshi/pukiwiki-movieviewer.git
