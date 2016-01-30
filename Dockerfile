@@ -42,14 +42,13 @@ RUN composer install
 
 # MovieViewer Plugin Setting
 WORKDIR /home/montenshi
-COPY pukiwiki-movieviewer-resources/movieviewer.ini.user.php /home/montenshi/htdocs/plugin
-
 RUN mkdir -p /home/montenshi/resources/settings
 RUN mkdir -p /home/montenshi/resources/data
-COPY pukiwiki-movieviewer-resources/settings /home/montenshi/resources/settings
-COPY pukiwiki-movieviewer-resources/data /home/montenshi/resources/data
-COPY pukiwiki-movieviewer-resources/htdocs/img/* /home/montenshi/htdocs/img/
-COPY pukiwiki-movieviewer-resources/htdocs/commu/data/* /home/montenshi/htdocs/commu/data/
+COPY resources/movieviewer/settings /home/montenshi/resources/settings
+COPY resources/movieviewer/data /home/montenshi/resources/data
+COPY resources/htdocs/img/* /home/montenshi/htdocs/img/
+COPY resources/htdocs/commu/data/* /home/montenshi/htdocs/commu/data/
+COPY resources/htdocs/plugin/movieviewer.ini.user.php /home/montenshi/htdocs/plugin
 RUN chown -R www-data:www-data htdocs resources
 
 EXPOSE 80
